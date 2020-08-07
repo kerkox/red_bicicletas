@@ -3,6 +3,7 @@ var Bicicleta = require("../../models/bicicleta");
 var server = require('../../bin/www')
 
 beforeEach(() => Bicicleta.allBicis = [])
+beforeEach(() => console.log('testeando...'));
 
 describe('Bicicleta API', () => {
   describe('GET BICICLETAS / ', () => {
