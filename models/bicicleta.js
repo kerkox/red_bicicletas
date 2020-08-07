@@ -15,9 +15,9 @@ Bicicleta.add = function (aBici) {
 }
 
 Bicicleta.findById = function (addBiciId) {
-  var addBiciId = Bicicleta.allBicis.find(x => x.id == addBiciId)
-  if (addBiciId)
-    return addBiciId
+  var addBici = Bicicleta.allBicis.find(x => x.id == addBiciId)
+  if (addBici)
+    return addBici
   else
     throw new Error(`No existe una bicicleta con el id ${addBiciId}`)
 }
@@ -32,10 +32,10 @@ Bicicleta.removeById = function (addBiciId) {
   }
 }
 
-var a = new Bicicleta(1, 'rojo', 'urbana', [6.2321014, -75.5854385]);
-var b = new Bicicleta(2, 'blanca', 'urbana', [6.238874, -75.574474]);
+// var a = new Bicicleta(1, 'rojo', 'urbana', [6.2321014, -75.5854385]);
+// var b = new Bicicleta(2, 'blanca', 'urbana', [6.238874, -75.574474]);
 
-Bicicleta.add(a);
-Bicicleta.add(b);
+// Bicicleta.add(a);
+// Bicicleta.add(b);
 
 module.exports = Bicicleta;
