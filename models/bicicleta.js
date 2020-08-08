@@ -31,5 +31,13 @@ bicicletaSchema.statics.add = function(aBici,cb){
   this.create(aBici,cb)
 }
 
+bicicletaSchema.statics.findByCode = function(aCode, cb){
+  return this.findOne({code: aCode}, cb)
+}
+
+bicicletaSchema.statics.removeByCode = function(aCode, cb){
+  return this.deleteOne({code: aCode}, cb)
+}
+
 module.exports = mongoose.model('Bicicleta', bicicletaSchema);
 
