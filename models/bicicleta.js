@@ -1,41 +1,31 @@
-var Bicicleta = function (id, color, modelo, ubicacion) {
-  this.id = id;
-  this.color = color;
-  this.modelo = modelo;
-  this.ubicacion = ubicacion;
-}
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-Bicicleta.prototype.toString = function () {
-  return `id: ${this.id}  | color: ${this.color}`
-}
-
-Bicicleta.allBicis = [];
-Bicicleta.add = function (aBici) {
-  Bicicleta.allBicis.push(aBici)
-}
-
-Bicicleta.findById = function (addBiciId) {
-  var addBici = Bicicleta.allBicis.find(x => x.id == addBiciId)
-  if (addBici)
-    return addBici
-  else
-    throw new Error(`No existe una bicicleta con el id ${addBiciId}`)
-}
-
-Bicicleta.removeById = function (addBiciId) {
-  // var addBici = Bicicleta.findById(addBiciId)
-  for (let i = 0; i < Bicicleta.allBicis.length; i++) {
-    if (Bicicleta.allBicis[i].id == addBiciId) {
-      Bicicleta.allBicis.splice(i, 1)
-      break;
-    }
+var bicicletaSchema = new Schema({
+  code: Number,
+  color: String,
+  modelo: String,
+  ubicacion: {
+    type: [Number], index: { type: '2dsphere', sparse: true }
   }
+})
+
+bicicletaSchema.statics.createInstance = function(code, color, modelo, ubicacion){
+  return new this({
+    code,
+    color,
+    modelo,
+    ubicacion
+  })
 }
 
-// var a = new Bicicleta(1, 'rojo', 'urbana', [6.2321014, -75.5854385]);
-// var b = new Bicicleta(2, 'blanca', 'urbana', [6.238874, -75.574474]);
+bicicletaSchema.methods.toString = function(){
+  return `code: ${this.code}  | color: ${this.color}`
+}
 
-// Bicicleta.add(a);
-// Bicicleta.add(b);
+bicicletaSchema.statics.allBicis = function(cb){
+  return this.find({},cb);
+}
 
-module.exports = Bicicleta;
+module.exports = mongoose.model('Bicicleta', bicicletaSchema);
+
