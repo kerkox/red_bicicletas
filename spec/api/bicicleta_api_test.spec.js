@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 var axios = require('axios');
 var Bicicleta = require("../../models/bicicleta");
 var server = require('../../bin/www')
