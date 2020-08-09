@@ -24,7 +24,7 @@ bicicletaSchema.methods.toString = function(){
 }
 
 bicicletaSchema.statics.allBicis = function(cb){
-  return this.find({},cb);
+  return this.find({},cb)
 }
 
 bicicletaSchema.statics.add = function(aBici,cb){
