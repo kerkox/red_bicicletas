@@ -1,6 +1,8 @@
 var mongoose = require('mongoose')
 var Bicicleta = require('../../models/bicicleta')
-var {Usuario, Reserva} = require('../../models/usuario')
+var Reserva = require('../../models/reserva');
+var Usuario = require('../../models/usuario');
+// var {Usuario, Reserva} = require('../../models/usuario')
 
 
 describe('Testing Usuarios', function () {

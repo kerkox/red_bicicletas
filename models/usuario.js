@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const Reserva = require('./Reserva')
+var Reserva = require('./reserva')
 var Schema = mongoose.Schema;
 
 var usuarioSchema = new Schema({
@@ -13,11 +13,8 @@ usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
     desde,
     hasta
   })
-  console.log("reserva", reserva)
+  console.log(reserva)
   reserva.save(cb);
 }
-let Usuario  = mongoose.model('Usuario', usuarioSchema)
-module.exports = {
-  Usuario,
-  Reserva
-}
+
+module.exports = mongoose.model('Usuario', usuarioSchema)
