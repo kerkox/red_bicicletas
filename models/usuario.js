@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 var Reserva = require('./reserva')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const crypto = require('crypto')
+const Token = require('./Token');
+const mailer = require('../mailer/mailer');
 
 const saltRounds = 10;
 
@@ -62,6 +65,28 @@ usuarioSchema.methods.reservar = function (biciId, desde, hasta, cb) {
   })
   console.log(reserva)
   reserva.save(cb);
+}
+
+usuarioSchema.methods.enviar_email_bienvenida = function(cb) {
+  const token = new Token({_userId: this.id, token: crypto.randomBytes(16).toString('hex')})
+  const email_destination = this.email;
+  token.save((err) => {
+    if ( err ) { return console.log(err.message)}
+    const mailOptions = {
+      from: 'no-reply@redbicicletas.com',
+      to: email_destination,
+      subject: 'Verificacion de cuenta',
+      text: 'Hola,\n\n' 
+      + 'Por favor, para verificar su cuenta haga click en este link: \n' 
+      + 'http://localhost:3000'
+      + '\/token/confirmation\/' + token.token + '.\n'
+    }
+
+    mailer.sendMail(mailOptions, function(err){
+      if( err ) { return console.log(err.message) } 
+      console.log('Se ha enviado un email de bienvenida a: ' + email_destination)
+    })
+  })
 }
 
 module.exports = mongoose.model('Usuario', usuarioSchema)
