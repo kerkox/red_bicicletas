@@ -20,7 +20,7 @@ block content
       each usuario in usuarios
         tr
           td(scope='row')
-            = usaurio.id
+            = usuario.id
           td= usuario.nombre
           td= usuario.email
           td= usuario.verificado ? 'SI' : 'NO'
@@ -29,4 +29,4 @@ block content
           td
             form.inline(method='post' action=`usuarios/${usuario.id}/delete`)
               input(type='hidden' name='id' value=usuario.id)
-              button.link-button.btn-danger(type='submit' name='submit_param' value=usuario.id)
+              button.link-button.btn-danger(type='submit' name='submit_param' value=usuario.id) Eliminar

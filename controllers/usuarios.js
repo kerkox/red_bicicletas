@@ -3,9 +3,14 @@ var Usuario = require('../models/usuario');
 module.exports = {
   list: function (req, res, next) {
     Usuario.find({}, (err, usuarios) => {
-      res.render('usuarios/index', {
-        usuarios
-      })
+      let data = {
+        usuarios: []
+      }
+      if (usuarios.length > 0) {
+        data.usuarios = usuarios
+      }
+      console.log(data)
+      res.render('usuarios/index', data)
     })
   },
   update_get: function (req, res, next) {
