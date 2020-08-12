@@ -3,7 +3,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 var Reserva = require('./reserva')
 const bcrypt = require('bcrypt');
 const crypto = require('crypto')
-const Token = require('./Token');
+const Token = require('./token');
 const mailer = require('../mailer/mailer');
 
 const saltRounds = 10;

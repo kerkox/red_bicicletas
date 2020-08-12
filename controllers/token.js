@@ -1,5 +1,5 @@
-let Usuario = require('../models/usuario');
-let Token = require('../models/token');
+const Usuario = require('../models/usuario');
+const Token = require('../models/token');
 
 module.exports = {
   confirmationGet: function (req, res, next) {
