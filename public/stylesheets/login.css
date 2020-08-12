@@ -1,5 +1,5 @@
 body#LoginForm {
-  background-image: url("https://hdwallsource.com/img/2014/9/blur");
+  background-image: url("../assets/img/blur-26347-27038-hd-wallpapers.jpg");
 }
 
 .form-heading {
@@ -26,6 +26,7 @@ body#LoginForm {
   border-radius: 4px;
   font-size: 14px;
   height: 50px;
+  width: 100%;
   line-height: 50px;
 }
 

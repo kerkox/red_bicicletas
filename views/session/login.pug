@@ -6,12 +6,12 @@ head
   link#bootstrap-css(href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")
   script(scr='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
   script(scr='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
-  link(rel="stylesheet", href="../../stylesheet/login.css")
+  link(rel="stylesheet", href="../stylesheets/login.css")
 
 body#LoginForm
   .container
     .login-form
-      .main-dev
+      .main-div
         .panel
           if info && info.message
             div.alert.alert-danger
@@ -20,9 +20,9 @@ body#LoginForm
           p Por favor, ingrese su email y clave
         form#Login(action="/login" method='post')
           .form-group
-            input#username.form-cotnrol(type="email" placeholder='Email Addres' name='email')
+            input#username.form-control(type="email" placeholder='Email Addres' name='email')
           .form-group
-            input#username.form-cotnrol(type="password" placeholder='Password' name='password')
+            input#password.form-control(type="password" placeholder='Password' name='password')
           .forgot
             a(href="/forgotPassword") Olvidé mi password
           

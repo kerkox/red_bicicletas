@@ -40,6 +40,27 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/login', function(req, res) {
+  res.render('session/login')
+})
+
+app.post('/login', function(req, res, next){
+  //passport
+})
+
+app.get('logout', function(req, res){
+
+  res.redirect('/')
+})
+
+app.get('/forgotPassword', function(req, res){
+  res.render('session/forgotPassword');
+})
+app.post('/forgotPassword', function(req, res){
+  
+})
+
+
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/token', tokenRouter);
