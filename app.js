@@ -34,13 +34,8 @@ app.use(session({
   secret: 'red_biciceasdadasd3424#@|~@#'
 }))
 var mongoose = require('mongoose');
-const {
-  SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION
-} = require('constants');
-const {
-  token
-} = require('morgan');
-const usuario = require('./models/usuario');
+const Token = require('./models/token');
+const Usuario = require('./models/usuario');
 
 var mongoDB = 'mongodb://localhost/red_bicicletas';
 mongoose.connect(mongoDB, {
