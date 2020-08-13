@@ -26,7 +26,6 @@ body#LoginForm {
   border-radius: 4px;
   font-size: 14px;
   height: 50px;
-  width: 100%;
   line-height: 50px;
 }
 
@@ -34,7 +33,7 @@ body#LoginForm {
   background: #ffffff;
   border-radius: 2px;
   margin: 10px auto 30px;
-  max-width: 38%;
+  max-width: 421px;
   padding: 50px 70px 70px 71px;
 }
 
