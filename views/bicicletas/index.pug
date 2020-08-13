@@ -21,7 +21,7 @@ block content
           td= bici.modelo
           td= bici.ubicacion
           td
-            a(href="bicicletas/" + bici.id +"/update") editar
+            a(href="bicicletas/" + bici.id +"/update" class="btn btn-primary") editar
           td
             form.inline(method="post" action="bicicletas/"+ bici.id + "/delete")
               input(type="hidden" name="id" value=bici.id)

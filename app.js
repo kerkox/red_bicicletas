@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('./config/passport');
 const session = require('express-session')
+const Usuario = require('./models/usuario');
 
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/usuarios');
@@ -25,6 +26,8 @@ app.use(session({
 }))
 var mongoose = require('mongoose');
 const { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } = require('constants');
+const { token } = require('morgan');
+const usuario = require('./models/usuario');
 
 var mongoDB = 'mongodb://localhost/red_bicicletas';
 mongoose.connect(mongoDB, {
@@ -74,18 +77,55 @@ app.get('/forgotPassword', function(req, res){
   res.render('session/forgotPassword');
 })
 app.post('/forgotPassword', function(req, res){
-  
+  usuario.findOne({ email: req.body.email }, function(err, usuario) {
+    if(!usuario) return res.render('session/forgotPassword', {info: {message: 'No existe el usuario con ese correo'}})
+
+    usuario.resetPassword(function(err){
+      if(err) return next(err);
+      console.log('session/forgtoPasswordMessage');
+    });
+    res.render('session/forgotPasswordMessage');
+  })
+})
+
+app.get('/resetPassword/:token', function(req, res, next) {
+  Token.findOne({ token: req.params.token }, function(err, token ){
+    if(!token) return res.status(400).send({ type: 'not-verified', msg: 'No existe un token'})
+
+    Usuario.findById(token._userId, function(err, usuario){
+      if ( !usuario) return res.status(400).send({ msg: 'No existe un usuario asociado'})
+      res.render('session/resetPassword', {errors: {}, usuario })
+    })
+  })
+})
+
+app.post('/resetPassword', function(req, res){
+  if(req.body.password != req.body.confirm_password) {
+    res.render('session/resetPassword', {errors: {confirm_password: {message: 'No conciden los passwords'}}})
+    return;
+  }
+  Usuario.findOne({ email: req.body.email }, function(err, usuario) {
+    usuario.password = req.body.password;
+    usuario.save(function(err){
+      if(err) {
+        res.render('session/resetPassword', {errors: err.errors, usuario: new Usuario()})
+      } else {
+        res.redirect('/login');
+      }
+    })
+  })
 })
 
 
-app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/token', tokenRouter);
 
 
-app.use('/bicicletas', bicicletasRouter);
+app.use('/bicicletas',loggedIn, bicicletasRouter);
 app.use('/api/bicicletas', bicicletasAPIRouter);
 app.use('/api/usuarios', usuariosAPIRouter);
+
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -102,5 +142,14 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function loggedIn(req, res, next) {
+  if(req.user){
+    next();
+  } else {
+    console.log('user sin loguearse');
+    res.redirect('/login')
+  }
+}
 
 module.exports = app;
