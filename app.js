@@ -45,7 +45,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.resolve(__dirname, './views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
@@ -56,7 +56,7 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, './public')));
 
 app.get('/login', function (req, res) {
   res.render('session/login')
