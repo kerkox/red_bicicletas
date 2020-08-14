@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-var Reserva = require('./reserva')
+const Reserva = require('./reserva')
 const bcrypt = require('bcrypt');
 const crypto = require('crypto')
 const Token = require('./token');
@@ -8,14 +8,14 @@ const mailer = require('../mailer/mailer');
 
 const saltRounds = 10;
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const validateEmail = function (email) {
   const regExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
   return regExp.test(email);
 }
 
-var usuarioSchema = new Schema({
+const usuarioSchema = new Schema({
   nombre: {
     type: String,
     trim: true,
