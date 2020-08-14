@@ -16,9 +16,6 @@ const bicicletasAPIRouter = require('./routes/api/bicicletas');
 const usuariosAPIRouter = require('./routes/api/usuarios');
 const authAPIRouter = require('./routes/api/auth');
 
-const Usuario = require('./models/usuario');
-const Token = require('./models/token');
-
 const store = new session.MemoryStore
 
 const app = express();
