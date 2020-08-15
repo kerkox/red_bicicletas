@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
 
     req.logIn(usuario, function (err) {
       if (err) return next(err)
-      return res.redirect('/');
+      return res.redirect('/bicicletas');
     });
   })(req, res, next)
 })

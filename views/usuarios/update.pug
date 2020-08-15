@@ -1,25 +1,26 @@
-extends ../layout
+extends ../includes/layout_bici
 
 block content
-  a(href='/usuarios') Volver
+  div.container
+    a(href='/usuarios') Volver
 
-  br
-  br
-  br
-  
-  h1 Actualizando Usuario
+    br
+    br
+    br
+    
+    h1 Actualizando Usuario
 
-  br
-  br
+    br
+    br
 
-  form(action=`/usuarios/${usuario.id}/update` method='post')
-    .form-group
-      label(for='nombre') Nombre:
-      input#nombre.form-control(type='text' name='nombre' value= usuario.nombre lass=errors.nombre ? 'is-invalid' : '' )
-      if errors.nombre
-        small#nombreHelp.text-danger
-          = errors.nombre.message
-  
-  br
-  br
-  input.btn.btn-primary(type='submit' value='OK')
+    form(action=`/usuarios/${usuario.id}/update` method='post')
+      .form-group
+        label(for='nombre') Nombre:
+        input#nombre.form-control(type='text' name='nombre' value= usuario.nombre lass=errors.nombre ? 'is-invalid' : '' )
+        if errors.nombre
+          small#nombreHelp.text-danger
+            = errors.nombre.message
+    
+    br
+    br
+    input.btn.btn-primary(type='submit' value='OK')
