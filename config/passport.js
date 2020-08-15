@@ -2,20 +2,20 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const Usuario = require('../models/usuario')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-// const FacebookTokenStrategy = require('passport-facebook-token');
+const FacebookTokenStrategy = require('passport-facebook-token');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-// passport.use(new FacebookTokenStrategy({
-//   clientID: process.env.FACEBOOK_APP_ID,
-//   clientSecret: process.env.FACEBOOK_APP_SECRET,
-// }, function (accessToken, refreshToken, profile, done) {
-//   Usuario.findOrCreateByFacebook(profile, function (err, user) {
-//     if (err) {
-//       return done(err);
-//     }
-//     done(null, user);
-//   });
-// }));
+passport.use(new FacebookTokenStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+}, function (accessToken, refreshToken, profile, done) {
+  Usuario.findOrCreateByFacebook(profile, function (err, user) {
+    if (err) {
+      return done(err);
+    }
+    done(null, user);
+  });
+}));
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
