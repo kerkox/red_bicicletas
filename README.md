@@ -8,6 +8,8 @@ Este proyecto se desarrolla para probar un CRUD de creacion de bicicletas y ubic
 
 ` npm install `
 
+- Se debe de copiar y pegar el archivo `.env.example` renombrado como `.env` para cargar las variables de entorno
+
 - Para desplegar el proyecto se hace lo siguiente:
 
 `npm start`

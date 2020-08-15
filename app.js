@@ -1,3 +1,4 @@
+require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -32,7 +33,7 @@ app.use(session({
   secret: 'red_biciceasdadasd3424#@|~@#'
 }))
 
-const mongoDB = process.env.URLDB || 'mongodb://localhost/red_bicicletas';
+const mongoDB = process.env.MONGO_URI || 'mongodb://localhost/red_bicicletas';
 mongoose.connect(mongoDB, {
   useNewUrlParser: true
 });
