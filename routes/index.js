@@ -25,7 +25,7 @@ router.post('/login', function (req, res, next) {
   })(req, res, next)
 })
 
-router.get('logout', function (req, res) {
+router.get('/logout', function (req, res) {
   req.logOut();
   res.redirect('/')
 })
