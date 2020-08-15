@@ -58,7 +58,7 @@ passport.use(new FacebookStrategy({
     callbackURL: process.env.HOST + "/auth/facebook/callback"
   },
   function (accessToken, refreshToken, profile, done) {
-    Usuario.findOrCreateByFacebook(profile, function (err, user) {
+    Usuario.findOneOrCreateByFacebook(profile, function (err, user) {
       if (err) {
         return done(err);
       }
