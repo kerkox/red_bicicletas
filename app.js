@@ -19,6 +19,7 @@ const bicicletasAPIRouter = require('./routes/api/bicicletas');
 const usuariosAPIRouter = require('./routes/api/usuarios');
 const authAPIRouter = require('./routes/api/auth');
 const authGoogle = require('./routes/google');
+const authFacebook = require('./routes/facebook');
 
 let store
 if(process.env.NODE_ENV === 'development' ) {
@@ -79,6 +80,7 @@ app.use('/api/auth', authAPIRouter);
 app.use('/api/bicicletas', validarUsuario, bicicletasAPIRouter);
 app.use('/api/usuarios', usuariosAPIRouter);
 app.use('/auth/google', authGoogle);
+app.use('/auth/facebook', authFacebook);
 
 
 // app.use('/google22cb063eff68be92.html', (req, res) => {

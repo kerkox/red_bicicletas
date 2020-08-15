@@ -19,10 +19,10 @@ block content
           th(scope='col') 
           th(scope='col') 
       tbody
-        each usuario in usuarios
+        each usuario, index in usuarios
           tr
             td(scope='row')
-              = usuario.id
+              = index
             td= usuario.nombre
             td= usuario.email
             td= usuario.verificado ? 'SI' : 'NO'
