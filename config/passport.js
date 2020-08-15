@@ -59,6 +59,8 @@ passport.use(new FacebookStrategy({
   },
   function (accessToken, refreshToken, profile, done) {
     Usuario.findOneOrCreateByFacebook(profile, function (err, user) {
+      console.log("profile", profile)
+      console.log("user", user)
       if (err) {
         return done(err);
       }

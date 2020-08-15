@@ -153,7 +153,7 @@ usuarioSchema.statics.findOneOrCreateByGoogle = function findOneOrCreate(conditi
 
 usuarioSchema.statics.findOneOrCreateByFacebook = function findOneOrCreate(condition, callback) {
     const self = this;
-    console.log(condition);
+    console.log("condition",condition);
     self.findOne({
         $or: [
             { 'facebookId': condition.id }, { 'email': condition.emails[0].value }
