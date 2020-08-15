@@ -1,5 +1,6 @@
 require('dotenv').config()
 const createError = require('http-errors');
+const assert = require('assert');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -17,6 +18,7 @@ const bicicletasRouter = require('./routes/bicicletas');
 const bicicletasAPIRouter = require('./routes/api/bicicletas');
 const usuariosAPIRouter = require('./routes/api/usuarios');
 const authAPIRouter = require('./routes/api/auth');
+const authGoogle = require('./routes/google');
 
 let store
 if(process.env.NODE_ENV === 'development' ) {
@@ -76,6 +78,7 @@ app.use('/bicicletas', loggedIn, bicicletasRouter);
 app.use('/api/auth', authAPIRouter);
 app.use('/api/bicicletas', validarUsuario, bicicletasAPIRouter);
 app.use('/api/usuarios', usuariosAPIRouter);
+app.use('/auth/google', authGoogle);
 
 
 // catch 404 and forward to error handler

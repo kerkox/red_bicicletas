@@ -1,20 +1,44 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const Usuario = require('../models/usuario')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 
-passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'},
-  function(email, password, done) {
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function (email, password, done) {
     console.log("****************************************")
     console.log("EMAIL: ", email)
-    Usuario.findOne({email: email}, function(err, usuarioDB) {
-      if(err) return done(err);
-      if( !usuarioDB) return done(null, false, {message: 'Email no existente o incorrecto'});
-      if(!usuarioDB.validPassword(password)) return done(null, false, {message: 'Password Incorrecto'})
+    Usuario.findOne({
+      email: email
+    }, function (err, usuarioDB) {
+      if (err) return done(err);
+      if (!usuarioDB) return done(null, false, {
+        message: 'Email no existente o incorrecto'
+      });
+      if (!usuarioDB.validPassword(password)) return done(null, false, {
+        message: 'Password Incorrecto'
+      })
 
       return done(null, usuarioDB)
     })
   }
 ));
+
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.HOST + "/auth/google/callback"
+  }, (accessToken, refreshToken, profile, cb) => {
+    console.log(profile);
+    Usuario.findOneOrCreateByGoogle(profile, (err, user) => {
+      return cb(err, user);
+    });
+  }));
+
+
 
 passport.serializeUser(function (user, cb) {
   cb(null, user.id);
