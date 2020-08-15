@@ -8,6 +8,7 @@ const passport = require('./config/passport');
 const session = require('express-session')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const indexRouter = require('./routes/index');
 const usuariosRouter = require('./routes/usuarios');
@@ -17,7 +18,19 @@ const bicicletasAPIRouter = require('./routes/api/bicicletas');
 const usuariosAPIRouter = require('./routes/api/usuarios');
 const authAPIRouter = require('./routes/api/auth');
 
-const store = new session.MemoryStore
+let store
+if(process.env.NODE_ENV === 'development' ) {
+   store = new session.MemoryStore
+} else {
+  store = new MongoDBStore({
+    uri: process.env.MONGO_URI,
+    collection: 'sessions'
+  });
+  store.on('error', function(error){
+    assert.ifError(error);
+    assert.ok(false);
+  })
+}
 
 const app = express();
 
