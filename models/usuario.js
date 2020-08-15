@@ -137,7 +137,7 @@ usuarioSchema.statics.findOneOrCreateByGoogle = function findOrCreate(condition,
 
             self.create(values)
                 .then((result) => {
-                    return callback(err, result);
+                    return callback(result);
                 })
                 .catch((err) => {
                     console.log(err);
