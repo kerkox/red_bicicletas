@@ -122,7 +122,7 @@ usuarioSchema.statics.findOneOrCreateByGoogle = function findOrCreate(condition,
         ]
     }).then((result) => {
         if (result) {
-            callback(result);
+            callback(null,result);
         } else {
             console.log('---------------- CONDITION ------------------');
             console.log(condition);
@@ -137,7 +137,7 @@ usuarioSchema.statics.findOneOrCreateByGoogle = function findOrCreate(condition,
 
             self.create(values)
                 .then((result) => {
-                    return callback(result);
+                    return callback(null,result);
                 })
                 .catch((err) => {
                     console.log(err);
