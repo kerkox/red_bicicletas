@@ -81,6 +81,10 @@ app.use('/api/usuarios', usuariosAPIRouter);
 app.use('/auth/google', authGoogle);
 
 
+// app.use('/google22cb063eff68be92.html', (req, res) => {
+//   res.sendFile('google22cb063eff68be92.html');
+// });
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
