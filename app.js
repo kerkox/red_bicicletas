@@ -1,3 +1,4 @@
+require('newrelic');
 require('dotenv').config()
 const createError = require('http-errors');
 const assert = require('assert');
