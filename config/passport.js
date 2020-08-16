@@ -57,7 +57,8 @@ passport.use(
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.HOST + "/auth/facebook/callback"
+    callbackURL: process.env.HOST + "/auth/facebook/callback",
+    profileFields: ["emails","name","displayName",]
   },
   function (accessToken, refreshToken, profile, done) {
     console.log("Face--profile", profile);
