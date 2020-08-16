@@ -10,6 +10,7 @@ passport.use(new FacebookTokenStrategy({
   clientSecret: process.env.FACEBOOK_APP_SECRET,
   fbGraphVersion: 'v3.0'
 }, function (accessToken, refreshToken, profile, done) {
+  console.log("FaceToken--profile", profile);
   Usuario.findOneOrCreateByFacebook(profile, function (err, user) {
     if (err) {
       return done(err);
