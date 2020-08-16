@@ -60,6 +60,7 @@ passport.use(new FacebookStrategy({
     callbackURL: process.env.HOST + "/auth/facebook/callback"
   },
   function (accessToken, refreshToken, profile, done) {
+    console.log("Face--profile", profile);
     Usuario.findOneOrCreateByFacebook(profile, function (err, user) {
       console.log("profile", profile)
       console.log("user", user)
