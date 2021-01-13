@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node bin/www",
     "devstart": "nodemon ./bin/wwW",
-    "test": "jasmine"
+    "test": "jasmine --config=spec/support/jasmine.json"
   },
   "dependencies": {
     "axios": "^0.21.1",

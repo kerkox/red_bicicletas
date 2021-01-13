@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mailer = require('../../mailer/mailer')
 
 describe('Pruebas envio de emails', () => {
@@ -11,10 +12,10 @@ describe('Pruebas envio de emails', () => {
   }
     mailer.sendMail(mailOptions, (err, info) => {
       if(err) {
-        console.log(err)
+        // console.log(err)
         done();
       }
-      console.log(info);
+      // console.log(info);
       expect(info).toBeDefined()
       done();      
     })
