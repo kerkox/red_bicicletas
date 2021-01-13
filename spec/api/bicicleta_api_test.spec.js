@@ -1,3 +1,4 @@
+require('dotenv').config();
 var mongoose = require('mongoose');
 var axios = require('axios');
 var Bicicleta = require("../../models/bicicleta");
@@ -7,8 +8,7 @@ var URL = 'http://localhost:3000/api/bicicletas';
 describe('Test Bicicleta', () => {
 
   beforeAll((done) => {
-    // var mongoDB = 'mongodb://localhost/testdb';
-    var mongoDB = 'mongodb+srv://strider:Qj7bTtEvyRqZW5mG@cluster0-vbnxk.mongodb.net/testdb';
+    var mongoDB = process.env.MOGNO_URI;
     mongoose.connect(mongoDB, {
       useNewUrlParser: true,
       useUnifiedTopology: true
