@@ -32,15 +32,22 @@ exports.bicicleta_create = function (req, res) {
 }
 
 exports.bicicleta_delete = function (req, res) {
-  Bicicleta.removeById(req.params.id)
-  res.status(204).send();
+  const id = req.params.id;
+  Bicicleta.findByIdAndRemove(id, (err, data) => {
+    if(err) {
+      res.status(404).json({ok:false, message:`Error no se encuentra la bicicleta con el ID: ${id}`})
+      return;
+    }
+    res.status(204).json({ok:true});
+
+  })
 }
 
 exports.bicicleta_update_post = function (req, res) {
   let body = _.pick(req.body, ['color', 'modelo', 'code'])
-
-  Bicicleta.findByIdAndUpdate(
-    req.params.id,
+  const id = req.params.id;
+  Bicicleta.findOneAndUpdate(
+    id,
     body, {
       new: true
     },
@@ -54,7 +61,7 @@ exports.bicicleta_update_post = function (req, res) {
           }
         })
       }
-
+      // console.log(`params.id ${id} biciDb.id: ${biciBD.id}********************`);
       return res.status(200).json({
         bicicleta: biciBD
       })

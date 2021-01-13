@@ -3,8 +3,9 @@ const Bicicleta = require('../../models/bicicleta');
 
 describe('Testing Bicicletas', function(){
   beforeEach(function(done){
-    var mongoDB = 'mongodb://localhost/testdb'
-    mongoose.connect(mongoDB, { useNewUrlParser: true})
+    // var mongoDB = 'mongodb://localhost/testdb'
+    var mongoDB = 'mongodb+srv://strider:Qj7bTtEvyRqZW5mG@cluster0-vbnxk.mongodb.net/testdb';
+    mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true})
 
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));

@@ -7,9 +7,11 @@ var Usuario = require('../../models/usuario');
 
 describe('Testing Usuarios', function () {
   beforeEach(function (done) {
-    var mongoDB = 'mongodb://localhost/testdb'
+    // var mongoDB = 'mongodb://localhost/testdb'
+    var mongoDB = 'mongodb+srv://strider:Qj7bTtEvyRqZW5mG@cluster0-vbnxk.mongodb.net/testdb';
     mongoose.connect(mongoDB, {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     })
 
     const db = mongoose.connection
@@ -53,7 +55,7 @@ describe('Testing Usuarios', function () {
       mañana.setDate(hoy.getDate() + 1)
       usuario.reservar(bicicleta.id, hoy, mañana, (err, reserva) => {
         Reserva.find({}).populate('bicicleta').populate('usuario').exec((err, reservas) => {
-          console.log(reservas[0]);
+          // console.log(reservas[0]);
           expect(reservas.length).toBe(1)
           expect(reservas[0].diasDeReserva()).toBe(2)
           expect(reservas[0].bicicleta.code).toBe(1)
