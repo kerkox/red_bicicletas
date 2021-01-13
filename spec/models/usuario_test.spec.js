@@ -1,3 +1,4 @@
+require('dotenv').config();
 var mongoose = require('mongoose')
 var Bicicleta = require('../../models/bicicleta')
 var Reserva = require('../../models/reserva');
@@ -6,20 +7,32 @@ var Usuario = require('../../models/usuario');
 
 
 describe('Testing Usuarios', function () {
-  beforeEach(function (done) {
-    // var mongoDB = 'mongodb://localhost/testdb'
-    var mongoDB = 'mongodb+srv://strider:Qj7bTtEvyRqZW5mG@cluster0-vbnxk.mongodb.net/testdb';
+  let db;
+  conectar = (done) => {
+    var mongoDB = process.env.MONGO_URI;
+    console.log("mongoDB: ", mongoDB)
     mongoose.connect(mongoDB, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
     })
 
-    const db = mongoose.connection
-    db.on('error', console.error.bind(console, 'connection error'))
+    db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', function () {
-      console.log('We are connected to test database')
-      done()
+      console.log('We are connected to test database!');
+      done();
     })
+  }
+  beforeAll(function (done) {
+    // var mongoDB = 'mongodb://localhost/testdb'
+    if (mongoose.connection.readyState) {
+      db = mongoose.connection;
+      done();
+    } else {
+      conectar(done);
+    }
   })
 
   afterEach(function (done) {
