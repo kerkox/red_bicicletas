@@ -30,7 +30,7 @@ describe('Test Bicicleta', () => {
 
 
   describe('GET BICICLETAS / ', () => {
-    it('Status 200', async () => {
+    it('Status 200', async (done) => {
       axios.get(URL, function (error, response, body) {
         let data = JSON.parse(body)
         expect(response.status).toBe(200);
