@@ -14,6 +14,6 @@ Este proyecto se desarrolla para probar un CRUD de creacion de bicicletas y ubic
 
 `npm start`
 
-esto se despligea por defecto en el puerto 3000 asi:
+esto se despliega por defecto en el puerto 3000 asi:
 
 `http://localhost:3000`
